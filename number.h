@@ -7,7 +7,8 @@
 
 #include <iostream>
 
-/* FORMAT
+/*
+ * FORMAT
  * if input == 0xABCD and sizeof(int) == 1
  * array[0] = 0xCD, array[1] = 0xAB
  */
@@ -16,8 +17,11 @@ private:
     size_t n;
     unsigned *array;
     bool negative;
+    bool owns = true;
 public:
     Number(bool negative, size_t n, const unsigned *arr);
+
+    Number(bool negative, size_t n, const unsigned *arr, bool copy, bool owns);
 
     explicit Number(const char *str);
 
@@ -29,5 +33,7 @@ public:
 
     bool isNegative() const;
 };
+
+Number operator+(Number& n1, Number& n2);
 
 #endif //KARLOV_MAY21_NUMBER_H

@@ -5,6 +5,6 @@
 #ifndef KARLOV_MAY21_CONFIG_H
 #define KARLOV_MAY21_CONFIG_H
 
-#define BASE 10
+#define BASE 16
 
 #endif //KARLOV_MAY21_CONFIG_H

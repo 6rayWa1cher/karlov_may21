@@ -26,7 +26,7 @@ Number columnMultiply(Number *x, Number *y) {
         carry = 0;
         for (size_t j = 0; j < xSize; ++j) {
             upperPart = xArr[j];
-            resultPart = lowermPart * upperPart + carry + out[j + i];
+            resultPart = lowerPart * upperPart + carry + out[j + i];
             carry = resultPart / BASE;
             out[j + i] = resultPart % BASE;
         }
@@ -39,6 +39,14 @@ Number columnMultiply(Number *x, Number *y) {
     return Number(x->isNegative() ^ y->isNegative(), newSize, out);
 }
 
+Number _$karatsubaMultiply(Number* x, size_t xFrom, size_t xTo, Number* y, size_t yFrom, size_t yTo) {
+
+}
+
+Number karatsubaMultiply(Number* x, Number* y) {
+
+}
+
 int main() {
     unsigned arr1[]{
             5, 4
@@ -49,6 +57,8 @@ int main() {
     Number n1(false, 2, arr1);
     Number n2(false, 2, arr2);
     Number n3 = columnMultiply(&n1, &n2);
+    // 1215 in base 10,
+    // 3,8,10 === A83 in base 16
     unsigned int *pInt = n3.getArray();
     std::cout << (n3.isNegative() ? "-" : "+") << n3.getN() << std::endl;
     for (size_t i = 0; i < n3.getN(); ++i) {

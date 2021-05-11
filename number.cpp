@@ -11,8 +11,21 @@ Number::Number(bool negative, size_t n, const unsigned *arr) : n(n), negative(ne
     copy((unsigned *) arr, 0, array, n);
 }
 
+Number::Number(bool negative, size_t n, const unsigned int *arr, bool copyArray, bool owns) :
+    n(n), negative(negative), owns(owns) {
+    if (copyArray) {
+        array = new unsigned[n];
+        copy((unsigned *) arr, 0, array, n);
+    } else {
+        array = (unsigned *) arr;
+    }
+}
+
+
 Number::~Number() {
-    delete array;
+    if (owns) {
+        delete array;
+    }
 }
 
 int Number::getN() const {
@@ -70,4 +83,6 @@ Number::Number(const char *str) {
     }
     n = eraseEndingZeroes(n, array);
 }
-
+Number operator+(Number &n1, Number &n2) {
+    unsigned *arr =
+}
