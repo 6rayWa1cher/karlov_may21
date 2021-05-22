@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-size_t eraseEndingZeroes(size_t n, uint8_t* arr);
+size_t getNormalizedLength(size_t n, const uint8_t* arr);
 
 void copy(const uint8_t *from, size_t fromPos, uint8_t *to, size_t toPos, size_t length);
 

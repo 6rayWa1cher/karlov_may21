@@ -6,6 +6,7 @@
 #define KARLOV_MAY21_ARRAY_H
 
 #include <iostream>
+#include <string>
 
 class Array {
 private:

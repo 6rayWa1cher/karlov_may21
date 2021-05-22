@@ -1,8 +1,5 @@
 #include <iostream>
-#include <math.h>
 #include "number.h"
-#include "utils.h"
-#include "array.h"
 #include "multiplication.h"
 
 int main() {

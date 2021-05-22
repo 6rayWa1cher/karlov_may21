@@ -40,9 +40,9 @@ Number::Number() : negative(false), array(1) {
     array.add(0);
 }
 
-Array sumNumbers(Number &in1, Number &in2) {
-    Number& n1 = in1.getN() <= in2.getN() ? in2 : in1;
-    Number& n2 = in1.getN() <= in2.getN() ? in1 : in2;
+Array sumNumbers(const Number &in1, const Number &in2) {
+    const Number& n1 = in1.getN() <= in2.getN() ? in2 : in1;
+    const Number& n2 = in1.getN() <= in2.getN() ? in1 : in2;
 
     Array array(max(n1.getN(), n2.getN()) + 1);
     bool carry = false;
@@ -71,19 +71,19 @@ Array sumNumbers(Number &in1, Number &in2) {
     return array;
 }
 
-Number operator+(Number &in1, Number &in2) {
+Number operator+(const Number &in1, const Number &in2) {
     Array array = sumNumbers(in1, in2);
 
     return Number(false, array);
 }
 
-bool operator==(Number &n1, Number &n2) {
+bool operator==(const Number &n1, const Number &n2) {
     if (n1.isNegative() != n2.isNegative()) return false;
 
     return n1.getArray() == n2.getArray();
 }
 
-bool operator!=(Number &n1, Number &n2) {
+bool operator!=(const Number &n1, const Number &n2) {
     return !(n1 == n2);
 }
 

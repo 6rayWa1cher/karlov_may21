@@ -5,11 +5,9 @@
 #include "utils.h"
 
 
-size_t eraseEndingZeroes(size_t n, uint8_t *arr) {
+size_t getNormalizedLength(size_t n, const uint8_t *arr) {
     size_t nonTailLength = n;
     while (nonTailLength != 0 && arr[nonTailLength - 1] == 0) --nonTailLength;
-    auto *out = new uint8_t[nonTailLength];
-    copy(arr, 0, out, 0, nonTailLength);
     return nonTailLength;
 }
 

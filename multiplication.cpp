@@ -70,7 +70,7 @@ Number columnMultiply(const Number &a, const Number &b) {
         }
     }
 
-    size_t newSize = eraseEndingZeroes(size, array);
+    size_t newSize = max(1, getNormalizedLength(size, array));
     Array arr(newSize, array);
     Number n(x.isNegative() ^ y.isNegative(), arr);
     delete[] array;

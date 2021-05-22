@@ -43,10 +43,10 @@ public:
 
 std::ostream& operator<<(std::ostream& ostream, const Number &n);
 
-Number operator+(Number &n1, Number &n2);
+Number operator+(const Number &n1, const Number &n2);
 
-bool operator==(Number &n1, Number &n2);
+bool operator==(const Number &n1, const Number &n2);
 
-bool operator!=(Number &n1, Number &n2);
+bool operator!=(const Number &n1, const Number &n2);
 
 #endif //KARLOV_MAY21_NUMBER_H
