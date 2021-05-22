@@ -74,6 +74,5 @@ Number columnMultiply(const Number &a, const Number &b) {
     Array arr(newSize, array);
     Number n(x.isNegative() ^ y.isNegative(), arr);
     delete[] array;
-    std::cout << n << std::endl;
     return n;
 }
