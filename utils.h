@@ -7,12 +7,16 @@
 
 #include <iostream>
 
-void doubleArraySize(size_t n, unsigned *&arr);
+void doubleArraySize(size_t n, uint8_t *&arr);
 
-unsigned * copyDoubleArraySize(size_t n, unsigned *arr);
+uint8_t * copyDoubleArraySize(size_t n, uint8_t *arr);
 
-size_t eraseEndingZeroes(size_t n, unsigned* arr);
+size_t eraseEndingZeroes(size_t n, uint8_t* arr);
 
-void copy(const unsigned *from, size_t fromPos, unsigned *to, size_t length);
+void copy(const uint8_t *from, size_t fromPos, uint8_t *to, size_t toPos, size_t length);
+
+size_t max(size_t i, size_t j);
+
+size_t min(size_t i, size_t j);
 
 #endif //KARLOV_MAY21_UTILS_H

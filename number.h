@@ -6,6 +6,7 @@
 #define KARLOV_MAY21_NUMBER_H
 
 #include <iostream>
+#include "array.h"
 
 /*
  * FORMAT
@@ -14,26 +15,40 @@
  */
 class Number {
 private:
-    size_t n;
-    unsigned *array;
+    Array array;
     bool negative;
-    bool owns = true;
 public:
-    Number(bool negative, size_t n, const unsigned *arr);
+    Number();
 
-    Number(bool negative, size_t n, const unsigned *arr, bool copy, bool owns);
+    Number(bool negative, const Array &array);
 
     explicit Number(const char *str);
 
-    ~Number();
+    size_t getN() const;
 
-    int getN() const;
-
-    unsigned *getArray() const;
+    const Array &getArray() const;
 
     bool isNegative() const;
+
+    std::string toString() const;
+
+    bool operator<(const Number &rhs) const;
+
+    bool operator>(const Number &rhs) const;
+
+    bool operator<=(const Number &rhs) const;
+
+    bool operator>=(const Number &rhs) const;
 };
 
-Number operator+(Number& n1, Number& n2);
+std::ostream& operator<<(std::ostream& ostream, const Number &n);
+
+Number operator+(Number &n1, Number &n2);
+
+//Number operator-(Number &n1, Number &n2);
+
+bool operator==(Number &n1, Number &n2);
+
+bool operator!=(Number &n1, Number &n2);
 
 #endif //KARLOV_MAY21_NUMBER_H
