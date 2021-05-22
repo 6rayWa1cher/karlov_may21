@@ -45,8 +45,6 @@ std::ostream& operator<<(std::ostream& ostream, const Number &n);
 
 Number operator+(Number &n1, Number &n2);
 
-//Number operator-(Number &n1, Number &n2);
-
 bool operator==(Number &n1, Number &n2);
 
 bool operator!=(Number &n1, Number &n2);

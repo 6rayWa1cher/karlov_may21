@@ -7,13 +7,15 @@
 
 #include <iostream>
 
-void doubleArraySize(size_t n, uint8_t *&arr);
-
-uint8_t * copyDoubleArraySize(size_t n, uint8_t *arr);
-
 size_t eraseEndingZeroes(size_t n, uint8_t* arr);
 
 void copy(const uint8_t *from, size_t fromPos, uint8_t *to, size_t toPos, size_t length);
+
+void copy(const uint8_t *from, uint8_t* to, size_t length);
+
+uint8_t *clone(const uint8_t *from, size_t capacity, size_t dataSize);
+
+uint8_t *clone(const uint8_t *from, size_t size);
 
 size_t max(size_t i, size_t j);
 
