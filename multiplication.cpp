@@ -49,10 +49,10 @@ Number shift(const Number &n, uint32_t digits) {
     for (uint32_t i = 0; i < arr.getSize(); ++i) {
         outArr.add(arr[i]);
     }
-    return Number(n.isNegative(), std::move(outArr));
+    return Number(n.isNegative(), outArr);
 }
 
-Number karatsubaMultiply(const Number &x, const Number &y) {
+Number $karatsubaMultiply(const Number &x, const Number &y) {
     uint32_t n = max(x.getN(), y.getN());
     if (n <= 4) {
         return columnMultiply(x, y);
@@ -61,13 +61,13 @@ Number karatsubaMultiply(const Number &x, const Number &y) {
     if (n % 2 != 0) ++n;
 
     uint32_t nHalf = n >> 1;
-    
+
     const Array &xArr = x.getArray();
     const Array &yArr = y.getArray();
     uint32_t xSize = xArr.getSize();
     uint32_t ySize = yArr.getSize();
-    
-    Array a1, b1, c1, d1;
+
+    Array a1(nHalf), b1(nHalf), c1(nHalf), d1(nHalf);
     for (uint32_t i = 0; i < nHalf; ++i) {
         if (i < xSize) b1.add(xArr[i]);
         if (i < ySize) d1.add(yArr[i]);
@@ -81,13 +81,18 @@ Number karatsubaMultiply(const Number &x, const Number &y) {
     if (c1.getSize() == 0) c1.add(0);
     if (d1.getSize() == 0) d1.add(0);
     Number
-        a(false, std::move(a1)),
-        b(false, std::move(b1)),
-        c(false, std::move(c1)),
-        d(false, std::move(d1));
-    Number u = karatsubaMultiply(a + b, c + d);
-    Number v = karatsubaMultiply(a, c);
-    Number w = karatsubaMultiply(b, d);
+            a(false, a1),
+            b(false, b1),
+            c(false, c1),
+            d(false, d1);
+    Number u = $karatsubaMultiply(a + b, c + d);
+    Number v = $karatsubaMultiply(a, c);
+    Number w = $karatsubaMultiply(b, d);
 
     return shift(v, n) + shift(u - v - w, nHalf) + w;
+}
+
+Number karatsubaMultiply(const Number &x, const Number &y) {
+    Number preOut = $karatsubaMultiply(x, y);
+    return Number(x.isNegative() ^ y.isNegative(), preOut.getArray());
 }
