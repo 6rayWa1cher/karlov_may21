@@ -177,6 +177,6 @@ std::string Number::toString() const {
     return oss.str();
 }
 
-Number::Number(bool negative, Array &&array) : negative(negative), array(array) {
+Number::Number(bool negative, Array &&array) : negative(negative), array(std::move(array)) {
 
 }

@@ -49,7 +49,7 @@ Number shift(const Number &n, uint32_t digits) {
     for (uint32_t i = 0; i < arr.getSize(); ++i) {
         outArr.add(arr[i]);
     }
-    return Number(n.isNegative(), outArr);
+    return Number(n.isNegative(), std::move(outArr));
 }
 
 Number $karatsubaMultiply(const Number &x, const Number &y) {
@@ -81,10 +81,10 @@ Number $karatsubaMultiply(const Number &x, const Number &y) {
     if (c1.getSize() == 0) c1.add(0);
     if (d1.getSize() == 0) d1.add(0);
     Number
-            a(false, a1),
-            b(false, b1),
-            c(false, c1),
-            d(false, d1);
+            a(false, std::move(a1)),
+            b(false, std::move(b1)),
+            c(false, std::move(c1)),
+            d(false, std::move(d1));
     Number u = $karatsubaMultiply(a + b, c + d);
     Number v = $karatsubaMultiply(a, c);
     Number w = $karatsubaMultiply(b, d);

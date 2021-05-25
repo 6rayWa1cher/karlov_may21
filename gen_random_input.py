@@ -9,8 +9,8 @@ def gen_long_number(length):
 
 
 def main():
-    a_len = 15000
-    b_len = 30000
+    a_len = random.randint(10000, 20000)
+    b_len = random.randint(10000, 20000)
     with open("input.txt", "w") as out:
         a = gen_long_number(a_len)
         b = gen_long_number(b_len)

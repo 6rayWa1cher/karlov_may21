@@ -26,6 +26,8 @@ public:
 
     Array& operator=(const Array& rhs); // copy assignment
 
+    Array(Array&& array) noexcept; // move constructor
+
     uint8_t add(uint8_t v);
 
     uint8_t& operator[](uint32_t i) const;

@@ -123,6 +123,12 @@ Array::Array(uint32_t size, uint8_t *inpArr, bool cloneArr) :
 
 }
 
+Array::Array(Array && a) noexcept : arr(a.arr), size(a.size), capacity(a.capacity){
+    a.size = 0;
+    a.capacity = 0;
+    a.arr = nullptr;
+}
+
 bool operator==(const Array &a, const Array &b) {
     if (a.getSize() != b.getSize()) return false;
 
