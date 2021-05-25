@@ -20,6 +20,8 @@ public:
 
     Array(uint32_t size, uint8_t *inpArr);
 
+    Array(uint32_t size, uint8_t *inpArr, bool cloneArr);
+
     Array(const Array& x); // copy constructor
 
     Array& operator=(const Array& rhs); // copy assignment

@@ -7,4 +7,6 @@
 
 Number columnMultiply(const Number &a, const Number &b);
 
+Number karatsubaMultiply(const Number &a, const Number &b);
+
 #endif //KARLOV_MAY21_MULTIPLICATION_H

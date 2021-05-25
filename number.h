@@ -22,6 +22,8 @@ public:
 
     Number(bool negative, const Array &array);
 
+    Number(bool negative, Array&& array);
+
     explicit Number(const char *str);
 
     size_t getN() const;
@@ -29,6 +31,10 @@ public:
     const Array &getArray() const;
 
     bool isNegative() const;
+
+    explicit operator std::string() const {
+        return toString();
+    }
 
     std::string toString() const;
 
@@ -44,6 +50,8 @@ public:
 std::ostream& operator<<(std::ostream& ostream, const Number &n);
 
 Number operator+(const Number &n1, const Number &n2);
+
+Number operator-(const Number &n1, const Number &n2);
 
 bool operator==(const Number &n1, const Number &n2);
 

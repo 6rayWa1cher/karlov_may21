@@ -31,11 +31,11 @@ void copy(const uint8_t *from, uint8_t *to, size_t length) {
     copy(from, 0, to, 0, length);
 }
 
-uint8_t *clone(const uint8_t *from, size_t size) {
-    return clone(from, size, size);
+uint8_t *clone(const uint8_t *from, size_t dataSize) {
+    return clone(from, dataSize, dataSize);
 }
 
-uint8_t *clone(const uint8_t *from, size_t capacity, size_t dataSize) {
+uint8_t *clone(const uint8_t *from, size_t dataSize, size_t capacity) {
     auto* newArr = new uint8_t[capacity];
     copy((uint8_t *) from, newArr, dataSize);
     return newArr;

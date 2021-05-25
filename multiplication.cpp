@@ -1,49 +1,11 @@
-#include <iostream>
 #include "number.h"
 #include "utils.h"
+#include "multiplication.h"
+#include "tables.h"
 
-uint8_t multiplicationTable[10][10] = {
-        {0, 0, 0,  0,  0,  0,  0,  0,  0,  0},
-        {0, 1, 2,  3,  4,  5,  6,  7,  8,  9},
-        {0, 2, 4,  6,  8,  10, 12, 14, 16, 18},
-        {0, 3, 6,  9,  12, 15, 18, 21, 24, 27},
-        {0, 4, 8,  12, 16, 20, 24, 28, 32, 36},
-        {0, 5, 10, 15, 20, 25, 30, 35, 40, 45},
-        {0, 6, 12, 18, 24, 30, 36, 42, 48, 54},
-        {0, 7, 14, 21, 28, 35, 42, 49, 56, 63},
-        {0, 8, 16, 24, 32, 40, 48, 56, 64, 72},
-        {0, 9, 18, 27, 36, 45, 54, 63, 72, 81}
-};
-
-uint8_t modTable[256] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1,
-                         2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3,
-                         4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5,
-                         6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7,
-                         8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1,
-                         2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3,
-                         4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4,
-                         5};
-
-uint8_t divTable[256] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3,
-                         3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6,
-                         6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,
-                         9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12,
-                         12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14,
-                         14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16,
-                         16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19,
-                         19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21, 21,
-                         21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 24,
-                         24, 24, 24, 24, 24, 24, 24, 24, 24, 25, 25, 25, 25, 25, 25};
-
-Number columnMultiply(const Number &a, const Number &b) {
-    Number x, y;
-    if (a.getN() < b.getN()) {
-        x = b;
-        y = a;
-    } else {
-        x = a;
-        y = b;
+Number columnMultiply(const Number &x, const Number &y) {
+    if (x.getN() < y.getN()) {
+        return columnMultiply(y, x);
     }
 
     uint32_t xSize = x.getN(), ySize = y.getN();
@@ -51,7 +13,7 @@ Number columnMultiply(const Number &a, const Number &b) {
     const Array &xArr = x.getArray();
     const Array &yArr = y.getArray();
 
-    auto* array = new uint8_t[size];
+    auto *array = new uint8_t[size];
     for (size_t i = 0; i < size; ++i) array[i] = 0;
 
     uint8_t upperPart, lowerPart, resultPart, carry;
@@ -75,4 +37,57 @@ Number columnMultiply(const Number &a, const Number &b) {
     Number n(x.isNegative() ^ y.isNegative(), arr);
     delete[] array;
     return n;
+}
+
+Number shift(const Number &n, uint32_t digits) {
+    const Array& arr = n.getArray();
+    if (arr.getSize() == 1 && arr[0] == 0) return n;
+    Array outArr(arr.getSize() + digits);
+    for (uint32_t i = 0; i < digits; ++i) {
+        outArr.add(0);
+    }
+    for (uint32_t i = 0; i < arr.getSize(); ++i) {
+        outArr.add(arr[i]);
+    }
+    return Number(n.isNegative(), std::move(outArr));
+}
+
+Number karatsubaMultiply(const Number &x, const Number &y) {
+    uint32_t n = max(x.getN(), y.getN());
+    if (n <= 4) {
+        return columnMultiply(x, y);
+    }
+
+    if (n % 2 != 0) ++n;
+
+    uint32_t nHalf = n >> 1;
+    
+    const Array &xArr = x.getArray();
+    const Array &yArr = y.getArray();
+    uint32_t xSize = xArr.getSize();
+    uint32_t ySize = yArr.getSize();
+    
+    Array a1, b1, c1, d1;
+    for (uint32_t i = 0; i < nHalf; ++i) {
+        if (i < xSize) b1.add(xArr[i]);
+        if (i < ySize) d1.add(yArr[i]);
+    }
+    for (uint32_t i = nHalf; i < n; ++i) {
+        if (i < xSize) a1.add(xArr[i]);
+        if (i < ySize) c1.add(yArr[i]);
+    }
+    if (a1.getSize() == 0) a1.add(0);
+    if (b1.getSize() == 0) b1.add(0);
+    if (c1.getSize() == 0) c1.add(0);
+    if (d1.getSize() == 0) d1.add(0);
+    Number
+        a(false, std::move(a1)),
+        b(false, std::move(b1)),
+        c(false, std::move(c1)),
+        d(false, std::move(d1));
+    Number u = karatsubaMultiply(a + b, c + d);
+    Number v = karatsubaMultiply(a, c);
+    Number w = karatsubaMultiply(b, d);
+
+    return shift(v, n) + shift(u - v - w, nHalf) + w;
 }

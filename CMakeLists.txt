@@ -7,7 +7,7 @@ add_executable(karlov_may21 main.cpp
         number.cpp number.h
         utils.cpp utils.h
         array.cpp array.h
-        multiplication.cpp multiplication.h)
+        multiplication.cpp multiplication.h tables.h)
 
 Include(FetchContent)
 
@@ -22,6 +22,6 @@ add_executable(tests test.cpp
         number.cpp number.h
         utils.cpp utils.h
         array.cpp array.h
-        multiplication.cpp multiplication.h)
+        multiplication.cpp multiplication.h tables.h)
 
 target_link_libraries(tests PRIVATE Catch2::Catch2)

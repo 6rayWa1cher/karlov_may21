@@ -3,8 +3,10 @@
 //
 
 #include <sstream>
+#include <cassert>
 #include "number.h"
 #include "utils.h"
+#include "tables.h"
 
 Number::Number(bool negative, const Array& array) : negative(negative), array(array) {
 
@@ -71,6 +73,38 @@ Array sumNumbers(const Number &in1, const Number &in2) {
     return array;
 }
 
+Array subNumbers(const Number &in1, const Number &in2) {
+    Array array(max(in1.getN(), in2.getN()) + 1);
+    bool carry = false;
+
+    const Array &n1a = in1.getArray();
+    const Array &n2a = in2.getArray();
+
+    for (uint32_t i = 0; i < in1.getN(); ++i) {
+
+        int8_t sub = n1a[i] - carry;
+        if (i < in2.getN()) sub -= n2a[i];
+
+        if (sub < 0) {
+            array.add(sub + 10);
+            carry = true;
+        } else {
+            array.add(sub);
+            carry = false;
+        }
+    }
+
+    for (int64_t i = array.getSize() - 1; i >= 0; --i) {
+        if (array[i] == 0 && i != 0) {
+            array.removeByIndex(i);
+        } else {
+            break;
+        }
+    }
+
+    return array;
+}
+
 Number operator+(const Number &in1, const Number &in2) {
     Array array = sumNumbers(in1, in2);
 
@@ -99,6 +133,12 @@ std::ostream& operator<<(std::ostream& ostream, const Number &n) {
     }
 
     return ostream;
+}
+
+Number operator-(const Number &in1, const Number &in2) {
+    Array array = subNumbers(in1, in2);
+
+    return Number(false, array);
 }
 
 bool Number::operator<(const Number &rhs) const {
@@ -135,4 +175,8 @@ std::string Number::toString() const {
     oss << *this;
 
     return oss.str();
+}
+
+Number::Number(bool negative, Array &&array) : negative(negative), array(array) {
+
 }
